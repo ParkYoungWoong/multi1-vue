@@ -1,7 +1,16 @@
-// 아무것도 의미하지 않는 값
+function a() {
+  return 123
+}
+function b() {
+  return {
+    x: 1
+  }
+}
+const obj = b()
+console.log(obj.x) // 1
+console.log(b().x) // 1
 
-// 명시적
-null
-
-// 암시적
-undefined
+function c() {
+  return [7, 8, 9]
+}
+console.log(c()[2]) // 9

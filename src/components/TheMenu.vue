@@ -5,11 +5,14 @@ const isShow = ref(false)
 
 function showMenu() {
   isShow.value = true
+  window.addEventListener('click', hideMenu)
 }
 function hideMenu() {
   isShow.value = false
+  window.removeEventListener('click', hideMenu)
 }
-function toggleMenu() {
+function toggleMenu(event: Event) {
+  event.stopPropagation()
   return isShow.value ? hideMenu() : showMenu()
 }
 </script>
@@ -18,8 +21,10 @@ function toggleMenu() {
   <div>
     <slot
       name="activator"
-      :abc="{ toggleMenu }"></slot>
-    <div v-if="isShow">
+      :toggleMenu="toggleMenu"></slot>
+    <div
+      v-if="isShow"
+      @click.stop>
       <slot></slot>
     </div>
   </div>
