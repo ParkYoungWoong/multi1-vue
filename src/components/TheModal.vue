@@ -1,12 +1,20 @@
 <script setup lang="ts">
-defineProps<{
-  modelValue?: boolean
-}>()
+withDefaults(
+  defineProps<{
+    modelValue?: boolean
+    maxWidth?: number
+  }>(),
+  {
+    modelValue: true,
+    maxWidth: 600
+  }
+)
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'close'])
 
 function closeModal() {
   emit('update:modelValue', false)
+  emit('close')
 }
 </script>
 
@@ -17,7 +25,9 @@ function closeModal() {
     <div
       class="overlay"
       @click="closeModal"></div>
-    <div class="content">
+    <div
+      :style="{ maxWidth: `${maxWidth}px` }"
+      class="content">
       <div
         class="close-btn"
         @click="closeModal">

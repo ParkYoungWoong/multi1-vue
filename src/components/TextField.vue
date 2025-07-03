@@ -9,7 +9,7 @@ defineEmits(['update:modelValue'])
 
 <template>
   <label>
-    <span>{{ label }}</span>
+    <span v-if="label">{{ label }}</span>
     <input
       v-bind="$attrs"
       :value="modelValue"
@@ -22,7 +22,6 @@ label {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-bottom: 10px;
 }
 label span {
   font-size: 13px;

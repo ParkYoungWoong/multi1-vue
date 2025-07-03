@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import TextField from '@/components/TextField.vue'
 import TheButton from '@/components/TheButton.vue'
 import { delay } from '@/utils'
@@ -7,6 +8,7 @@ import { delay } from '@/utils'
 const id = ref('')
 const pw = ref('')
 const isLoading = ref(false)
+const router = useRouter()
 
 async function signIn() {
   if (isLoading.value) return
@@ -14,6 +16,7 @@ async function signIn() {
   await delay(3000)
   console.log(id.value, pw.value, '로그인 완료!')
   isLoading.value = false
+  router.forward()
 }
 </script>
 

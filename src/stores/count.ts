@@ -18,5 +18,15 @@ export const useCountStore = defineStore('count', {
     increase() {
       this.count += 1
     }
+    // changeCount(value: number) {
+    //   this.count = value
+    //   this.min = value
+    //   this.max = value * 99
+    //   this.$patch({
+    //     count: value,
+    //     min: value,
+    //     max: value * 99
+    //   })
+    // }
   }
 })
