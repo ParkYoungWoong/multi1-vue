@@ -5,7 +5,7 @@ import Empty from './EmptyLayout.vue'
 
 declare module 'vue-router' {
   interface RouteMeta {
-    layout: keyof typeof layouts
+    layout?: keyof typeof layouts
   }
 }
 
@@ -18,6 +18,22 @@ const route = useRoute()
 
 <template>
   <Component :is="layouts[route.meta.layout || 'Default']">
-    <RouterView />
+    <Transition
+      name="fade"
+      mode="out-in">
+      <RouterView />
+    </Transition>
   </Component>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+}
+.fade-enter-from,
+.fade-leave-to {
+}
+.fade-enter-to,
+.fade-leave-from {
+}
+</style>

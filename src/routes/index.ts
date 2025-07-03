@@ -4,6 +4,7 @@ import AboutPage from './pages/AboutPage.vue'
 import MoviesPage from './pages/MoviesPage.vue'
 import MovieDetailsPage from './pages/MovieDetailsPage.vue'
 import NotFoundPage from './pages/NotFoundPage.vue'
+import SignInPage from './pages/SignInPage.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -23,12 +24,22 @@ export default createRouter({
     {
       path: '/movies',
       component: MoviesPage,
+      meta: {
+        requiresAuth: true
+      },
       children: [
         {
           path: ':movieId', // /movies/:movieId
           component: MovieDetailsPage
         }
       ]
+    },
+    {
+      path: '/signin',
+      component: SignInPage,
+      meta: {
+        guestOnly: true
+      }
     },
     {
       path: '/:notFound(.*)*',

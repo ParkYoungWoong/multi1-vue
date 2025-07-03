@@ -14,9 +14,13 @@ async function signIn() {
   if (isLoading.value) return
   isLoading.value = true
   await delay(3000)
-  console.log(id.value, pw.value, '로그인 완료!')
+  // console.log(id.value, pw.value, '로그인 완료!')
+  if (id.value.trim() && pw.value.trim()) {
+    // const { token } = await (서버로 전송! 검증! 성공!)
+    localStorage.setItem('token', 'abcd1234')
+    router.push('/')
+  }
   isLoading.value = false
-  router.forward()
 }
 </script>
 
@@ -46,5 +50,8 @@ form {
   padding: 20px 14px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>
