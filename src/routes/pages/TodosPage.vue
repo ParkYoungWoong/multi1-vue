@@ -2,6 +2,7 @@
 import TextField from '@/components/TextField.vue'
 import TheButton from '@/components/TheButton.vue'
 import TheLoader from '@/components/TheLoader.vue'
+import TodoItem from '@/components/todos/TodoItem.vue'
 import { useTodoStore } from '@/stores/todo'
 
 const todoStore = useTodoStore()
@@ -26,11 +27,15 @@ todoStore.fetchTodos()
   <div
     v-else
     class="todo-list">
-    <div
+    <!-- <div
       v-for="todo in todoStore.todos"
       :key="todo.id">
       {{ todo.title }}({{ todo.done }})
-    </div>
+    </div> -->
+    <TodoItem
+      v-for="todo in todoStore.todos"
+      :key="todo.id"
+      :todo="todo" />
   </div>
 </template>
 
@@ -39,5 +44,11 @@ todoStore.fetchTodos()
   display: grid;
   grid-template-columns: 1fr 100px;
   gap: 10px;
+}
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
 }
 </style>

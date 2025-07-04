@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { defineStore } from 'pinia'
 
-interface Todo {
+export interface Todo {
   id: string // 할 일 ID
   order: number // 할 일 순서
   title: string // 할 일 제목
@@ -25,7 +25,8 @@ export const useTodoStore = defineStore('todo', {
     inputTitle: '',
     isLoadingForCreate: false,
     isLoadingForFetch: false,
-    isLoadingForUpdate: false
+    isLoadingForUpdate: false,
+    isLoadingForDelete: false
   }),
   getters: {},
   actions: {
@@ -59,7 +60,23 @@ export const useTodoStore = defineStore('todo', {
         method: 'PUT',
         data: todo
       })
+      const index = this.todos.findIndex(t => t.id === todo.id)
+      this.todos[index] = todo
       this.isLoadingForUpdate = false
+    },
+    async deleteTodo(todo: Todo) {
+      if (this.isLoadingForDelete) return
+      this.isLoadingForDelete = true
+      await request({
+        url: `/${todo.id}`,
+        method: 'DELETE'
+      })
+      const index = this.todos.findIndex(t => t.id === todo.id)
+      this.todos.splice(index, 1)
+
+      // this.todos = this.todos.filter(t => t.id !== todo.id)
+
+      this.isLoadingForDelete = false
     }
   }
 })

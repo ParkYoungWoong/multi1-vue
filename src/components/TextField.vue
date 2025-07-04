@@ -1,16 +1,23 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
+const inputEl = ref<HTMLInputElement | null>(null)
+
 defineProps<{
   label?: string
   modelValue?: string
 }>()
-
 defineEmits(['update:modelValue'])
+defineExpose({
+  inputEl
+})
 </script>
 
 <template>
   <label>
     <span v-if="label">{{ label }}</span>
     <input
+      ref="inputEl"
       v-bind="$attrs"
       :value="modelValue"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" />
