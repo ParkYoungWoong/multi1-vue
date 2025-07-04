@@ -24,7 +24,7 @@ function signOut() {
 <template>
   <header>
     <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/about">About</RouterLink>token
+    <RouterLink to="/about">About</RouterLink>
     <RouterLink to="/movies">Movies</RouterLink>
     <RouterLink
       v-if="!token"

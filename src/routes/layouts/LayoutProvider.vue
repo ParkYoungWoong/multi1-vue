@@ -29,11 +29,15 @@ const route = useRoute()
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
+  transition-duration: 0.3s;
+  position: absolute;
 }
 .fade-enter-from,
 .fade-leave-to {
+  opacity: 0;
 }
 .fade-enter-to,
 .fade-leave-from {
+  opacity: 1;
 }
 </style>
