@@ -25,21 +25,23 @@ async function signIn() {
 </script>
 
 <template>
-  <form @submit.prevent>
-    <TextField
-      v-model="id"
-      label="아이디" />
-    <TextField
-      v-model="pw"
-      label="비밀번호"
-      type="password" />
-    <TheButton
-      color="primary"
-      :loading="isLoading"
-      @click="signIn">
-      로그인
-    </TheButton>
-  </form>
+  <div>
+    <form @submit.prevent>
+      <TextField
+        v-model="id"
+        label="아이디" />
+      <TextField
+        v-model="pw"
+        label="비밀번호"
+        type="password" />
+      <TheButton
+        color="primary"
+        :loading="isLoading"
+        @click="signIn">
+        로그인
+      </TheButton>
+    </form>
+  </div>
 </template>
 
 <style scoped>

@@ -31,6 +31,8 @@ const route = useRoute()
 .fade-leave-active {
   transition-duration: 0.3s;
   position: absolute;
+  width: 100%;
+  box-sizing: border-box;
 }
 .fade-enter-from,
 .fade-leave-to {

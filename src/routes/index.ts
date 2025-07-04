@@ -5,6 +5,7 @@ import MoviesPage from './pages/MoviesPage.vue'
 import MovieDetailsPage from './pages/MovieDetailsPage.vue'
 import NotFoundPage from './pages/NotFoundPage.vue'
 import SignInPage from './pages/SignInPage.vue'
+import TodosPage from './pages/TodosPage.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -40,6 +41,10 @@ export default createRouter({
       meta: {
         guestOnly: true
       }
+    },
+    {
+      path: '/todos',
+      component: TodosPage
     },
     {
       path: '/:notFound(.*)*',

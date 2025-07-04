@@ -26,6 +26,7 @@ function signOut() {
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/about">About</RouterLink>
     <RouterLink to="/movies">Movies</RouterLink>
+    <RouterLink to="/todos">Todos</RouterLink>
     <RouterLink
       v-if="!token"
       to="/signin">
