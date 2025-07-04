@@ -9,8 +9,8 @@ import { useQuery, useQueryClient } from '@tanstack/vue-query'
 
 const movieStore = useMovieStore()
 const queryClient = useQueryClient()
+const inputText = ref('')
 const searchTextRef = ref<{ inputEl: HTMLInputElement } | null>(null)
-const movies = ref<Movie[]>([])
 // 쿼리 옵션을 반응형으로 만들어서 검색 키워드가 변경될 때마다 새로운 쿼리를 실행!
 const queryOptions = computed(() => ({
   queryKey: ['movies', movieStore.searchText],
@@ -23,16 +23,18 @@ const queryOptions = computed(() => ({
 }))
 
 // 쿼리 실행 및 등록!
-useQuery<Movie[]>(queryOptions.value)
+// queryOptions.value가 아닌 ref 객체를 전달해야 반환 데이터의 반응형 유지!
+const { data, isLoading } = useQuery<Movie[]>(queryOptions)
 
 onMounted(() => {
   searchTextRef.value?.inputEl.focus()
 })
 
 async function fetchMovies() {
+  movieStore.searchText = inputText.value
   if (!movieStore.searchText.trim()) return
   // 캐시된 데이터가 있으면 그 데이터를 사용하고, 없으면 새로 데이터를 가져옴!
-  movies.value = await queryClient.fetchQuery(queryOptions.value)
+  await queryClient.fetchQuery(queryOptions.value)
 }
 </script>
 
@@ -40,7 +42,7 @@ async function fetchMovies() {
   <div class="search">
     <TextField
       ref="searchTextRef"
-      v-model="movieStore.searchText"
+      v-model="inputText"
       @keydown.enter="fetchMovies" />
     <TheButton
       :loading="movieStore.isLoading"
@@ -48,9 +50,10 @@ async function fetchMovies() {
       검색
     </TheButton>
   </div>
-  <ul v-if="movies.length">
+  {{ isLoading }}
+  <ul v-if="data?.length">
     <li
-      v-for="movie in movies"
+      v-for="movie in data"
       :key="movie.imdbID">
       <RouterLink :to="`/movies/${movie.imdbID}`">
         <div class="title">{{ movie.Title }}</div>
